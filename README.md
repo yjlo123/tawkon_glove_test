@@ -18,35 +18,35 @@ tawkon_glove_test
 <h6>init()</h6>
 get and output device information, install app package
 
-<h6>tutorial()<h6>
+<h6>tutorial()</h6>
 swipe five times and take screenshot accordingly
 
-<h6>nap_email()<h6>
+<h6>nap_email()</h6>
 inout email and submit
 
-<h6>nap_num()<h6>
+<h6>nap_num()</h6>
 inut phone number and submit
 
-<h6>wait_for_result(time)<h6>
+<h6>wait_for_result(time)</h6>
 wait for 'time' seconds
 
-<h6>result(number_of_result)<h6>
+<h6>result(number_of_result)</h6>
 swipe 'number_of_result' times and take screenshot accordingly
 
-<h6>swipe_back(number)<h6>
+<h6>swipe_back(number)</h6>
 swipe backwords 'number' times
 
-<h6>how()<h6>
+<h6>how()</h6>
 access how activity through menu, take screenshot
 
-<h6>offer()<h6>
+<h6>offer()</h6>
 click offer and representative button
 
-<h6>left_btn(name)<h6>
+<h6>left_btn(name)</h6>
 click left button
 
-<h6>right_btn(name)<h6>
+<h6>right_btn(name)</h6>
 click right button
 
-<h6>uninstall()<h6>
+<h6>uninstall()</h6>
 organize files, write data.txt file, uninstall package
