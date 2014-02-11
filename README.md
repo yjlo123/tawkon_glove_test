@@ -2,9 +2,11 @@ tawkon_glove_test
 =================
 <h2>Auto UI tesing for Glove with monkeyrunner</h2>
 
-<h5>Country:</h5>
-1. IL
-2. US
+<h5>Country / Language:</h5>
+1. IL(English)
+2. IL(Hebrew)
+3. US(English)
+4. US(Hebrew)
 
 <h5>Menu:</h5>
 1. Test Glove
