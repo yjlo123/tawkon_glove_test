@@ -7,11 +7,12 @@ import shutil
 
 screenshot_path = "glove_test/screenshots";
 
-if len(sys.argv) != 2:
+if len(sys.argv) != 3:
 	print "[Glove-test] Incorrect argument"
-	exit()
+	sys.exit(0)
 
 country = sys.argv[1]
+lang = sys.argv[2]
 
 devices = os.popen('adb devices').read().strip().split('\n')[1:]
 
@@ -39,7 +40,7 @@ def init():
 	screen_width = int(device.getProperty("display.width"))
 	screen_height = int(device.getProperty("display.height"))
 
-	print "[Glove-test] start testing ("+country+")"
+	print "[Glove-test] start testing ("+country+" ["+lang+"])"
 	print "[Glove-test] connected device"
 	print "[Glove-test] device ID: " + str(deviceid)
 	print "[Glove-test] screen resolution: " + str(screen_width) + " * " + str(screen_height)
@@ -58,7 +59,10 @@ def tutorial():
 	print "[Screenshot] tut_0"
 	MonkeyRunner.sleep(1)
 	for num in range(1,6):
-		device.drag(((screen_width)*2/3, screen_height/2),(screen_width/3,screen_height/2),0.15,5)
+		if lang == 'he':
+			device.drag((screen_width/3,screen_height/2),((screen_width)*2/3, screen_height/2),0.15,5)
+		else:
+			device.drag(((screen_width)*2/3, screen_height/2),(screen_width/3,screen_height/2),0.15,5)
 		print "[Action] swipe"
 		MonkeyRunner.sleep(1)
 		result = device.takeSnapshot()
@@ -124,7 +128,10 @@ def result(number_of_results):
 	print "[Screenshot] result_1"
 
 	for num in range(2,number_of_results+1):
-		device.drag(((screen_width)*2/3, screen_height/2),((screen_width)/3,screen_height/2),0.15,5)
+		if lang == 'he':
+			device.drag((screen_width/3,screen_height/2),((screen_width)*2/3, screen_height/2),0.15,5)
+		else:
+			device.drag(((screen_width)*2/3, screen_height/2),((screen_width)/3,screen_height/2),0.15,5)
 		print "[Action] swipe"
 		MonkeyRunner.sleep(1)
 		result = device.takeSnapshot()
@@ -135,7 +142,10 @@ def result(number_of_results):
 # swipe back
 def swipe_back(number):
 	for n in range(0,number):
-		device.drag((screen_width/3, screen_height/2),((screen_width)*2/3,screen_height/2),0.15,5)
+		if lang == 'he':
+			device.drag(((screen_width)*2/3, screen_height/2),((screen_width)/3,screen_height/2),0.15,5)
+		else:
+			device.drag((screen_width/3, screen_height/2),((screen_width)*2/3,screen_height/2),0.15,5)
 		print "[Action] swipe"
 		MonkeyRunner.sleep(1)
 
@@ -262,7 +272,8 @@ def uninstall():
 	for pngfile in glob.iglob(os.path.join(screenshot_path, "*.png")):
 	    shutil.move(pngfile, dst)
 	data = open(dst+'/data.txt', 'w')
-	data.write("country="+country)
+	data.write("country="+country+"\n")
+	data.write("language="+lang+"\n")
 	data.closed
 	print "[Glove-test] finished"
 

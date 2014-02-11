@@ -2,26 +2,36 @@ import sys
 import os
 
 def code_to_country(code):
-	if code == 1:
+	if code in (1, 2):
 		return 'IL'
-	elif code == 2:
+	elif code in (3, 4):
 		return 'US'
 	else:
 		return 'unknown'
 
+def code_to_lang(code):
+	if code in (1, 3):
+		return 'en'
+	elif code in (2, 4):
+		return 'he'
+	else:
+		return 'unknown'
+
 def select_country():
-	print "Select country:"
-	print "1. IL"
-	print "2. US"
-	country = input("country: ")
-	if str(country).isdigit():
-		return int(country)
+	print "Select country(language):"
+	print "1. IL(English)"
+	print "2. IL(Hebrew)"
+	print "3. US(English)"
+	print "4. US(Hebrew)"
+	country_language = input("country: ")
+	if str(country_language).isdigit():
+		return int(country_language)
 	else:
 		print "Invalid country"
 		select_country()
 
-def print_menu(country_code):
-	print "=== Glove Testing ("+code_to_country(country_code)+") ==="
+def print_menu(code):
+	print "=== Glove Testing ("+code_to_country(code)+"["+code_to_lang(code)+"]) ==="
 	print "1. Test Glove"
 	print "2. Generate raw report"
 	print "3. Generate final report"
@@ -38,14 +48,15 @@ def input_command():
 		input_command()
 
 def main_loop():
-	country_code = select_country()
-	country = code_to_country(country_code)
-	print_menu(country_code)
+	code = select_country()
+	country = code_to_country(code)
+	language = code_to_lang(code)
+	print_menu(code)
 	command = input_command()
 	while command != 6:
 		if command == 1:
 			print "Test Glove("+country+")"
-			os.system('monkeyrunner test.py '+country)
+			os.system('monkeyrunner test.py '+country+' '+language)
 		elif command == 2:
 			print "Generate raw report"
 			os.system('python report.py '+country)
@@ -56,11 +67,12 @@ def main_loop():
 			print "Clean screenshots"
 			os.system('monkeyrunner clean.py')
 		elif command == 5:
-			country_code = select_country()
-			country = code_to_country(country_code)
+			code = select_country()
+			country = code_to_country(code)
+			language = code_to_lang(code)
 		else:
 			print "Invalid command"
-		print_menu(country_code)
+		print_menu(code)
 		command = input_command()
 	print "Finished."
 	exit()
